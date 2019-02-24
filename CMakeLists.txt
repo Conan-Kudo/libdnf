@@ -32,6 +32,7 @@ option(WITH_HTML "Enables hawkey HTML generation" ON)
 option(WITH_MAN "Enables hawkey man page generation" ON)
 option(ENABLE_RHSM_SUPPORT "Build with Red Hat Subscription Manager support?" OFF)
 option(ENABLE_SOLV_URPMREORDER "Build with support for URPM-like solution reordering?" OFF)
+option(ENABLE_PERL_BINDINGS "Build Perl bindings?" OFF)
 
 
 # load pkg-config first; it's required by other modules
@@ -140,7 +141,9 @@ endif()
 # build binaries
 add_subdirectory(libdnf)
 if(WITH_BINDINGS)
-    # add_subdirectory(bindings/perl)
+    if(ENABLE_PERL_BINDINGS)
+        add_subdirectory(bindings/perl)
+    endif()
     add_subdirectory(bindings/python)
 endif()
 
